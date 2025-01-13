@@ -37,61 +37,44 @@ def main_menu_keyboard(can_undo: bool, can_redo: bool) -> InlineKeyboardMarkup:
 #
 def pixelate_menu_keyboard(preview_stage: int = 0) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
-
-    # +, -, Colors Count, B&W
     builder.button(text="+", callback_data="pixel_plus")
     builder.button(text="-", callback_data="pixel_minus")
-    builder.button(text="Colors Count", callback_data="pixel_colors")
-    builder.button(text="B&W", callback_data="pixel_bw")
-
-    # Toggle between "Preview" and "Save"
-    btn_text = "Preview" if preview_stage == 0 else "Save"
-    builder.button(text=btn_text, callback_data="pixel_preview")
-
-    # Back to Main
+    builder.button(
+        text="Preview" if preview_stage == 0 else "Save",
+        callback_data="pixel_preview"
+    )
     builder.button(text="Back to Main", callback_data="pixel_back_to_main")
-
-    # e.g., 4 in the first row, 1 in the second, 1 in the third
-    builder.adjust(4, 1, 1)
-
+    builder.adjust(2, 1, 1)
     return builder.as_markup()
 
-#
-# BRIGHTNESS MENU
-#
 def brightness_menu_keyboard(preview_stage: int = 0) -> InlineKeyboardMarkup:
-    """
-    Brightness menu with +, - and a "Preview" -> "Save" toggle.
-    """
     builder = InlineKeyboardBuilder()
-
     builder.button(text="+", callback_data="brightness_plus")
     builder.button(text="-", callback_data="brightness_minus")
-
-    btn_text = "Preview" if preview_stage == 0 else "Save"
-    builder.button(text=btn_text, callback_data="brightness_preview")
-
-    # Example layout: 2 buttons in the first row, 1 in the second
-    builder.adjust(2, 1)
-
+    builder.button(
+        text="Preview" if preview_stage == 0 else "Save",
+        callback_data="brightness_preview"
+    )
+    builder.button(text="Back to Main", callback_data="brightness_back_to_main")
+    builder.adjust(2, 1, 1)
     return builder.as_markup()
 
-#
-# CONTRAST MENU
-#
 def contrast_menu_keyboard(preview_stage: int = 0) -> InlineKeyboardMarkup:
-    """
-    Contrast menu with +, - and a "Preview" -> "Save" toggle.
-    """
     builder = InlineKeyboardBuilder()
-
     builder.button(text="+", callback_data="contrast_plus")
     builder.button(text="-", callback_data="contrast_minus")
-
-    btn_text = "Preview" if preview_stage == 0 else "Save"
-    builder.button(text=btn_text, callback_data="contrast_preview")
-
-    # Example layout: 2 buttons in the first row, 1 in the second
-    builder.adjust(2, 1)
-
+    builder.button(
+        text="Preview" if preview_stage == 0 else "Save",
+        callback_data="contrast_preview"
+    )
+    builder.button(text="Back to Main", callback_data="contrast_back_to_main")
+    builder.adjust(2, 1, 1)
     return builder.as_markup()
+
+def confirm_save_keyboard() -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+    builder.button(text="Yes", callback_data="confirm_save_yes")
+    builder.button(text="No", callback_data="confirm_save_no")
+    builder.adjust(2)
+    return builder.as_markup()
+

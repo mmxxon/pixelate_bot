@@ -6,10 +6,6 @@ async def load_user_data(state: FSMContext) -> UserData:
     Loads user data from state, ignoring ephemeral fields like 'pixel_preview_stage'.
     """
     data = await state.get_data()
-    # Remove ephemeral keys
-    ephemeral_keys = ["pixel_preview_stage", "brightness_preview_stage", "contrast_preview_stage"]
-    for key in ephemeral_keys:
-        data.pop(key, None)
 
     # Convert remaining data into UserData
     user_data = UserData(**data) if data else UserData()

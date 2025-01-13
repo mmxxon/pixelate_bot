@@ -5,6 +5,8 @@ import sys
 from config import BOT_TOKEN
 from controllers.menu_controller import menu_router
 from controllers.pixelate_controller import pixelate_router
+from controllers.brightness_controller import brightness_router
+from controllers.contrast_controller import contrast_router
 
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message
@@ -16,6 +18,8 @@ async def main() -> None:
     dp = Dispatcher(storage=MemoryStorage())
     dp.include_router(menu_router)
     dp.include_router(pixelate_router)
+    dp.include_router(brightness_router)
+    dp.include_router(contrast_router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
